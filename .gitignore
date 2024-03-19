@@ -1,0 +1,25 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/.pnp
+.pnp.js
+
+# production
+/build-ide
+/build-snippets
+
+# environment variables
+.env*
+!.env.example
+
+# package manager
+yarn-error.log
+node_modules
+.yarn
+
+# Firebase API keys
+.firebase
+/src/services/firebase/firebase.config.ts
+
+# Sentry API keys
+.sentryclirc

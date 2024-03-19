@@ -1,0 +1,88 @@
+#ide {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow-y: hidden !important;
+    width: 100%;
+}
+
+#workspace {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    overflow-y: hidden !important;
+
+    &.is-file-manager-open {
+        @media (max-width: 768px) {
+            // this puts the file manager on top in a mobile view
+            flex-direction: column;
+        }
+    }
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 10px 1fr;
+    width: 100%;
+
+    @media (max-width: 768px) {
+        display: block;
+    }
+}
+
+.gutter-col {
+    cursor: col-resize;
+    background-color: #ecf0f1;
+}
+
+div.pane {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+
+    .tab-content-container {
+        height: 100%;
+        position: relative;
+
+        .tab-content {
+            overflow: auto;
+            padding: 0;
+
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            top: 0;
+
+            &.inactive {
+                // must use visibility: hidden here because display: none causes
+                // various minor issues with iframes and interpreters
+                visibility: hidden;
+                z-index: 1;
+            }
+
+            &.active {
+                visibility: visible;
+                z-index: 2;
+            }
+        }
+
+        // Get rid of the transition animation
+        * {
+            transition: visibility 0ms;
+        }
+
+        .button {
+            transition: all 200ms ease, visibility 0ms;
+        }
+    }
+
+    // Moves the left pane's tabs one pixel to the left so that they cover
+    // the file manager's border --> makes it look like the file manager
+    // toggle button is part of the file manager pane
+    &:first-of-type .tabs {
+        position: relative;
+        left: -1px;
+    }
+}

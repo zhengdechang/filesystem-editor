@@ -1,0 +1,18 @@
+nav.navbar {
+    // remove rounded corners
+    border-radius: 0;
+
+    svg {
+        margin-right: 0.3rem;
+
+        &.no-margin-fix {
+            margin-right: 0;
+        }
+    }
+
+    #mobile-main-nav {
+        .navbar-item {
+            flex: 1;
+        }
+    }
+}

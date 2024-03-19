@@ -1,0 +1,18 @@
+{
+  "projects": {
+    "dev": "borogove-ide-dev",
+    "production": "borogove-ide"
+  },
+  "targets": {
+    "borogove-ide": {
+      "hosting": {
+        "ide": [
+          "borogove-ide"
+        ],
+        "snippets": [
+          "borogove-snippets"
+        ]
+      }
+    }
+  }
+}
