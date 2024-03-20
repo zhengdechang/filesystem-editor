@@ -22,21 +22,15 @@ import {
 import materialsStore, { FSLoadState } from "stores/materialsStore";
 import projectStore, { ProjectStoreState } from "stores/projectStore";
 import settingsStore from "stores/settingsStore";
-import ProjectService from "services/projects/ProjectService.class";
-interface LanguageCardProps {
-  projectService: ProjectService;
-}
-
 /**
  * This is the main component that does top-level routing between the few different
  * page types that we have: New project page, loading page, and the main IDE.
  */
-const App: React.FC = observer(() => {
+const App: React.FC = observer((projectService) => {
   const [isLoadingSnippet, setIsLoadingSnippet] = useState(isSnippetsVariant);
 
   useEffect(() => {
-    console.log(projectServiceList, "projectServiceList");
-    projectServiceList[0].initProject();
+    projectService.initProject();
   }, []);
 
   if (isSnippetsVariant) {

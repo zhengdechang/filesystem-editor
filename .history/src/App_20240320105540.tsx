@@ -12,7 +12,7 @@ import StartupError from "components/loader/StartupError";
 import { isSnippetsVariant } from "services/app/env";
 import { pageView } from "services/app/loggers";
 import projectServiceList from "services/projects/projectServiceList";
-
+import ProjectService from "services/projects/ProjectService.class";
 import {
   getSnippet,
   parseUrlForSnippetId,
@@ -22,10 +22,6 @@ import {
 import materialsStore, { FSLoadState } from "stores/materialsStore";
 import projectStore, { ProjectStoreState } from "stores/projectStore";
 import settingsStore from "stores/settingsStore";
-import ProjectService from "services/projects/ProjectService.class";
-interface LanguageCardProps {
-  projectService: ProjectService;
-}
 
 /**
  * This is the main component that does top-level routing between the few different
@@ -35,8 +31,7 @@ const App: React.FC = observer(() => {
   const [isLoadingSnippet, setIsLoadingSnippet] = useState(isSnippetsVariant);
 
   useEffect(() => {
-    console.log(projectServiceList, "projectServiceList");
-    projectServiceList[0].initProject();
+    projectService.initProject();
   }, []);
 
   if (isSnippetsVariant) {

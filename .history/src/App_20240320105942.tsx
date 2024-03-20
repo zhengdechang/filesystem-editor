@@ -31,12 +31,11 @@ interface LanguageCardProps {
  * This is the main component that does top-level routing between the few different
  * page types that we have: New project page, loading page, and the main IDE.
  */
-const App: React.FC = observer(() => {
+const App: React.FC<LanguageCardProps> = observer(({ projectService }) => {
   const [isLoadingSnippet, setIsLoadingSnippet] = useState(isSnippetsVariant);
 
   useEffect(() => {
-    console.log(projectServiceList, "projectServiceList");
-    projectServiceList[0].initProject();
+    projectService.initProject();
   }, []);
 
   if (isSnippetsVariant) {

@@ -1,8 +1,3 @@
-/*
- * @Description: 
- * @Author: Devin
- * @Date: 2024-03-19 10:06:32
- */
 import React from "react";
 import { observer } from "mobx-react";
 import { Container } from "bloomer";

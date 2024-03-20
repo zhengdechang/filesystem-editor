@@ -35,8 +35,7 @@ const App: React.FC = observer(() => {
   const [isLoadingSnippet, setIsLoadingSnippet] = useState(isSnippetsVariant);
 
   useEffect(() => {
-    console.log(projectServiceList, "projectServiceList");
-    projectServiceList[0].initProject();
+    projectServiceList.initProject();
   }, []);
 
   if (isSnippetsVariant) {

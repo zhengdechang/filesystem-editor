@@ -12,7 +12,6 @@ import StartupError from "components/loader/StartupError";
 import { isSnippetsVariant } from "services/app/env";
 import { pageView } from "services/app/loggers";
 import projectServiceList from "services/projects/projectServiceList";
-
 import {
   getSnippet,
   parseUrlForSnippetId,
@@ -22,10 +21,6 @@ import {
 import materialsStore, { FSLoadState } from "stores/materialsStore";
 import projectStore, { ProjectStoreState } from "stores/projectStore";
 import settingsStore from "stores/settingsStore";
-import ProjectService from "services/projects/ProjectService.class";
-interface LanguageCardProps {
-  projectService: ProjectService;
-}
 
 /**
  * This is the main component that does top-level routing between the few different
@@ -33,11 +28,6 @@ interface LanguageCardProps {
  */
 const App: React.FC = observer(() => {
   const [isLoadingSnippet, setIsLoadingSnippet] = useState(isSnippetsVariant);
-
-  useEffect(() => {
-    console.log(projectServiceList, "projectServiceList");
-    projectServiceList[0].initProject();
-  }, []);
 
   if (isSnippetsVariant) {
     useEffect(() => {
@@ -80,7 +70,7 @@ const App: React.FC = observer(() => {
     return <FullScreenLoader />;
   }
 
-  const main = (): ReactElement | null => {
+  const main = (): ReactElement => {
     switch (projectStore.loadState) {
       // case ProjectStoreState.waiting:
       //     // If there's only one project type which has only one template option,
@@ -102,8 +92,6 @@ const App: React.FC = observer(() => {
       //     return <ProjectLoadingError />;
 
       case ProjectStoreState.ready:
-        return <IDE />;
-      default:
         return <IDE />;
     }
   };
