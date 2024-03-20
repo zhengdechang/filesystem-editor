@@ -23,3 +23,5 @@ node_modules
 
 # Sentry API keys
 .sentryclirc
+
+.history
