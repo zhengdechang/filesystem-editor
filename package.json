@@ -39,6 +39,7 @@
     "@typescript-eslint/eslint-plugin": "5.32.0",
     "@typescript-eslint/parser": "5.32.0",
     "@uiw/react-codemirror": "4.7.0",
+    "aieditor": "^1.0.0-rc.8",
     "awesome-typescript-loader": "5.2.1",
     "axios": "0.27.2",
     "babel-eslint": "10.1.0",
