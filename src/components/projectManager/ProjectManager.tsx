@@ -1,12 +1,11 @@
 /*
- * @Description: 
+ * @Description:
  * @Author: Devin
  * @Date: 2024-03-19 10:06:32
  */
 import React from "react";
 import { observer } from "mobx-react";
 import { Container } from "bloomer";
-import NavHeader from "components/layout/navHeader/NavHeader";
 
 import projectServices from "services/projects/projectServiceList";
 import ProjectService from "services/projects/ProjectService.class";
@@ -27,7 +26,6 @@ export const ProjectManagerElement: React.FC<ProjectManagerElementProps> =
     return (
       <div>
         <Container id="project-manager">
-          <NavHeader title={title} />
           <div id="language-cards-list">
             {projectServices.map((project) => (
               <LanguageCard key={project.id} projectService={project} />
