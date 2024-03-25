@@ -51,9 +51,9 @@ const App: React.FC = observer(() => {
       if (snippetId) {
         getSnippet(snippetId).then((snippetData) => {
           if (snippetData) {
-            initSnippetProject(snippetId, snippetData).then(() => {
-              setIsLoadingSnippet(false);
-            });
+            // initSnippetProject(snippetId, snippetData).then(() => {
+            //   setIsLoadingSnippet(false);
+            // });
           } else {
             // TODO: error handling
             setIsLoadingSnippet(false);
