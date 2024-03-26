@@ -51,30 +51,28 @@ export default abstract class Inform7ProjectService extends ProjectService {
     console.log(initSuccess, "initSuccess");
 
     if (initSuccess) {
-      this.generateUUIDFile();
-
-      const storedCompilerVersion = settingsStore.getSetting(
-        "language",
-        "compilerVersion",
-        DEFAULT_I7_COMPILER_VERSION
-      );
-
-      if (
-        this.compilerVersions &&
-        this.compilerVersions.length > 0 &&
-        !this.compilerVersions.includes(storedCompilerVersion)
-      ) {
-        // if an invalid compiler version has been stored to the settings, fall back to the project default
-        const projectDefaultCompiler = this.compilerVersions[0];
-        projectStore.compilerVersion = projectDefaultCompiler;
-        settingsStore.saveSetting(
-          "language",
-          "compilerVersion",
-          projectDefaultCompiler
-        );
-      } else {
-        projectStore.compilerVersion = storedCompilerVersion;
-      }
+      // this.generateUUIDFile();
+      // const storedCompilerVersion = settingsStore.getSetting(
+      //   "language",
+      //   "compilerVersion",
+      //   DEFAULT_I7_COMPILER_VERSION
+      // );
+      // if (
+      //   this.compilerVersions &&
+      //   this.compilerVersions.length > 0 &&
+      //   !this.compilerVersions.includes(storedCompilerVersion)
+      // ) {
+      //   // if an invalid compiler version has been stored to the settings, fall back to the project default
+      //   const projectDefaultCompiler = this.compilerVersions[0];
+      //   projectStore.compilerVersion = projectDefaultCompiler;
+      //   settingsStore.saveSetting(
+      //     "language",
+      //     "compilerVersion",
+      //     projectDefaultCompiler
+      //   );
+      // } else {
+      //   projectStore.compilerVersion = storedCompilerVersion;
+      // }
     } else {
       projectStore.setState(ProjectStoreState.error);
     }

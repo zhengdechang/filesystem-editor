@@ -1,3 +1,8 @@
+/*
+ * @Description:
+ * @Author: Devin
+ * @Date: 2024-03-19 10:06:32
+ */
 import React, { ReactElement, useEffect, useState } from "react";
 import { observer } from "mobx-react";
 
@@ -35,35 +40,10 @@ const App: React.FC = observer(() => {
   const [isLoadingSnippet, setIsLoadingSnippet] = useState(isSnippetsVariant);
 
   useEffect(() => {
+    if (materialsStore.fsState !== FSLoadState.ready) return;
     console.log(projectServiceList, "projectServiceList");
-    projectServiceList[0].initProject();
-  }, []);
-
-  if (isSnippetsVariant) {
-    useEffect(() => {
-      // don't start the project before filesystem is ready
-      if (materialsStore.fsState !== FSLoadState.ready) {
-        return;
-      }
-
-      const snippetId = parseUrlForSnippetId();
-
-      if (snippetId) {
-        getSnippet(snippetId).then((snippetData) => {
-          if (snippetData) {
-            // initSnippetProject(snippetId, snippetData).then(() => {
-            //   setIsLoadingSnippet(false);
-            // });
-          } else {
-            // TODO: error handling
-            setIsLoadingSnippet(false);
-          }
-        });
-      } else {
-        setIsLoadingSnippet(false);
-      }
-    }, [materialsStore.fsState]);
-  }
+    projectServiceList[0].initProject(undefined, true);
+  }, [materialsStore.fsState]);
 
   // show an error message if we can't initialize the filesystem
   if (materialsStore.fsState === FSLoadState.unavailable) {

@@ -144,6 +144,7 @@ export default abstract class ProjectService {
     // mark this as a page view
     pageView("/ide/" + this.id);
 
+    console.log(this.id, " this.id", preferRestore);
     // hide the file manager if it shouldn't be open at the start
     // either because the project setting says so or we're in snippets mode
     if (!this.fileManagerStartsOpen || isSnippetsVariant) {
@@ -152,7 +153,7 @@ export default abstract class ProjectService {
 
     if (preferRestore) {
       const restoreSuccess = await this.restoreProject();
-
+      console.log(this.id, " this.id");
       if (restoreSuccess) {
         return true;
       }
