@@ -31,48 +31,11 @@ export default abstract class Inform7ProjectService extends ProjectService {
   public storyFileFormat = "glulx";
   public tabIndent = true;
 
-  public generateUUIDFile(): void {
-    const { uuid } = projectStore;
-
-    // already exists, don't duplicate
-    if (materialsStore.findByFullPath("/uuid.txt")) {
-      return;
-    }
-
-    materialsStore.addMaterialsFile(uuid, {
-      name: "uuid.txt",
-      locked: true,
-      type: MaterialsFileType.text,
-    });
-  }
-
   public initProject = async (template?: ProjectTemplate): Promise<void> => {
-    const initSuccess = await this.init(template);
+    const initSuccess = await this.init(template, true);
     console.log(initSuccess, "initSuccess");
-
     if (initSuccess) {
-      // this.generateUUIDFile();
-      // const storedCompilerVersion = settingsStore.getSetting(
-      //   "language",
-      //   "compilerVersion",
-      //   DEFAULT_I7_COMPILER_VERSION
-      // );
-      // if (
-      //   this.compilerVersions &&
-      //   this.compilerVersions.length > 0 &&
-      //   !this.compilerVersions.includes(storedCompilerVersion)
-      // ) {
-      //   // if an invalid compiler version has been stored to the settings, fall back to the project default
-      //   const projectDefaultCompiler = this.compilerVersions[0];
-      //   projectStore.compilerVersion = projectDefaultCompiler;
-      //   settingsStore.saveSetting(
-      //     "language",
-      //     "compilerVersion",
-      //     projectDefaultCompiler
-      //   );
-      // } else {
-      //   projectStore.compilerVersion = storedCompilerVersion;
-      // }
+      projectStore.setReady();
     } else {
       projectStore.setState(ProjectStoreState.error);
     }

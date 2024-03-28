@@ -42,7 +42,7 @@ const App: React.FC = observer(() => {
   useEffect(() => {
     if (materialsStore.fsState !== FSLoadState.ready) return;
     console.log(projectServiceList, "projectServiceList");
-    projectServiceList[0].initProject(undefined, true);
+    projectServiceList[0].initProject(projectServiceList[0].templates[0]);
   }, [materialsStore.fsState]);
 
   // show an error message if we can't initialize the filesystem

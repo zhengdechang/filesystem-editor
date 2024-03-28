@@ -88,6 +88,7 @@
     "mobx": "6.6.1",
     "mobx-react": "7.5.2",
     "path-browserify": "1.0.1",
+    "pify": "^6.1.0",
     "pnp-webpack-plugin": "1.7.0",
     "postcss": "8.4.14",
     "postcss-flexbugs-fixes": "5.0.2",

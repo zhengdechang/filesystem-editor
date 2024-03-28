@@ -144,16 +144,9 @@ export default abstract class ProjectService {
     // mark this as a page view
     pageView("/ide/" + this.id);
 
-    console.log(this.id, " this.id", preferRestore);
-    // hide the file manager if it shouldn't be open at the start
-    // either because the project setting says so or we're in snippets mode
-    if (!this.fileManagerStartsOpen || isSnippetsVariant) {
-      // ideStateStore.toggleFileManager( false );
-    }
-
     if (preferRestore) {
       const restoreSuccess = await this.restoreProject();
-      console.log(this.id, " this.id");
+      console.log(restoreSuccess, "preferRestore");
       if (restoreSuccess) {
         return true;
       }
@@ -203,10 +196,11 @@ export default abstract class ProjectService {
    */
   public initProject = async (
     template?: ProjectTemplate,
-    preferRestore = false
+    preferRestore = true
   ): Promise<void> => {
     const status = await this.init(template, preferRestore);
 
+    console.log(status, "status");
     if (status) {
       // on mobile sizes always start with the file manager closed
       if (isMobileWidth() && ideStateStore.fileManagerOpen) {
@@ -227,7 +221,7 @@ export default abstract class ProjectService {
       await restoreFS(this.id);
       return true;
     } catch (e) {
-      console.log(e);
+      console.log(e, "e");
       return false;
     }
   };

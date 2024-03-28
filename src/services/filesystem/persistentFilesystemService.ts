@@ -5,7 +5,11 @@ import editorStateStore from "stores/editorStateStore";
 import materialsStore from "stores/materialsStore";
 import projectStore from "stores/projectStore";
 
-import { getFS } from "./localFilesystemService";
+import {
+  getFS,
+  findAllProject,
+  ensureDirExists,
+} from "./localFilesystemService";
 import {
   PERSISTENT_FILESYSTEM_DIR,
   PROJECT_ROOT_DIR,
@@ -132,7 +136,7 @@ function rmRecursively(fs: any, filepath: string): Promise<void> {
 export async function persistFS(projectId: string): Promise<void> {
   const fs: any = getFS(); // eslint-disable-line
   const persistentRoot = join(PERSISTENT_FILESYSTEM_DIR, projectId);
-
+  await ensureDirExists(persistentRoot);
   await copyRecursively(fs, PROJECT_ROOT_DIR, PROJECT_ROOT_DIR, persistentRoot);
 
   fs.writeFile(
@@ -144,21 +148,30 @@ export async function persistFS(projectId: string): Promise<void> {
 
 export async function restoreFS(projectId: string): Promise<void> {
   const fs: any = getFS(); // eslint-disable-line
+
   const persistentRoot = join(PERSISTENT_FILESYSTEM_DIR, projectId);
   let fileToOpen: MaterialsFile | undefined | null;
-  console.log(fs, "initFS");
+  await ensureDirExists(persistentRoot);
+
+  await copyRecursively(fs, persistentRoot, persistentRoot, PROJECT_ROOT_DIR);
+
+  if (fileToOpen) {
+    editorStateStore.openFile(fileToOpen);
+  }
   await new Promise((resolve, reject) => {
     fs.readFile(
       join(persistentRoot, BOROGOVE_SETTINGS_FILE),
       { encoding: "utf8" },
       (err: Error | null, contents: string) => {
         if (!contents || err) {
+          console.log(err, "err");
           reject();
           return;
         }
 
         try {
           const settings: SettingsFile = JSON.parse(contents);
+          console.log(settings.files, "settings.files");
 
           materialsStore.restoreFS(settings.files);
 
@@ -181,12 +194,6 @@ export async function restoreFS(projectId: string): Promise<void> {
       }
     );
   });
-
-  await copyRecursively(fs, persistentRoot, persistentRoot, PROJECT_ROOT_DIR);
-
-  if (fileToOpen) {
-    editorStateStore.openFile(fileToOpen);
-  }
 }
 
 let debounceTimer: number;
