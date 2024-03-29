@@ -4661,10 +4661,10 @@ aggregate-error@^3.0.0:
     clean-stack "^2.0.0"
     indent-string "^4.0.0"
 
-aieditor@^1.0.0-rc.8:
-  version "1.0.0-rc.8"
-  resolved "https://registry.npmmirror.com/aieditor/-/aieditor-1.0.0-rc.8.tgz#8d41ea8d9f30fd7175b0d16948fa88b4752df392"
-  integrity sha512-FcNCRI5WqGhaUXO3c8q29YTV07iWFMKIeAarT8J7j1gHvubOVMOkJNmUxD0P+ZuWwH4S4njj9mcpST7gnELc/g==
+aieditor@^1.0.0:
+  version "1.0.0-rc.9"
+  resolved "https://registry.npmmirror.com/aieditor/-/aieditor-1.0.0-rc.9.tgz#3a332e8150c8c1c8f074ae1e756cfc8cd06ce175"
+  integrity sha512-/j6qRHW8zMAn7L/oYq4m6DRR+JydOPWSFvjRs/K0vg8fgtKghcqjeOwB6/MqBHyaG79zmGzGXU1I2S8iioE5pg==
   dependencies:
     "@tiptap/core" "^2.1.16"
     "@tiptap/extension-bubble-menu" "^2.1.16"

@@ -200,12 +200,42 @@ export const TextEditorElement: React.FC<TextEditorElementProps> = ({
         },
         ai: {
           models: {
-            spark: {
-              protocol: "wss",
-              appId: "8cf39191",
-              apiKey: "3640caaedbbe57f407d4d33b33567c99",
-              apiSecret: "NjJhZjdhM2VkYzYxMzNkYjIwOGFkMzYw",
-              version: "v3.1",
+            // spark: {
+            //   protocol: "wss",
+            //   appId: "daed94b1",
+            //   apiKey: "63b1568d8a0f08228f1ed5e2a16fa6e1",
+            //   apiSecret: "YzM5NTdjODUwYWFmYzk1YTQwNWEwOTZi",
+            //   version: "v3.5",
+            // },
+            custom: {
+              url: "http://10.10.100.79:8022/api/v1/conversion/stream",
+              method: "POST",
+              ReferenceError: "ReferenceError",
+              headers: () => {
+                return {
+                  Authorization:
+                    "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTE3NDI3MjgsImlhdCI6MTcxMTY4MjcyOCwibmJmIjoxNzExNjgyNzI4LCJzdWIiOiI2MTFhZDY4Ny1iZjIyLTQwNzgtOGU4NC0yZDM2MWE5MTFiMmEifQ.1UUG_bFtoVdqaouMf75FUieY3ipCzqd-te4KLb1gDsPJvxXT-xtDWvwaJN2MgFZnUl-ktTY9evU0fMD7y6z7Hw",
+                };
+              },
+              messageWrapper: (message: string) => {
+                const requestBody = {
+                  question: message,
+                  conversion_name: "aiedit测试数据",
+                  stream: true,
+                };
+
+                return JSON.stringify(requestBody);
+              },
+              messageParser: (message: string) => {
+                console.log("messageParser", message);
+                return {
+                  role: "assistant",
+                  content: message,
+                  // index: 0,
+                  // //0 代表首个文本结果；1 代表中间文本结果；2 代表最后一个文本结果。
+                  // status: 0|1|2,
+                };
+              },
             },
           },
           bubblePanelEnable: true,
